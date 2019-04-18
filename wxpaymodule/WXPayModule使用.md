@@ -7,10 +7,20 @@
 ```
 
 - ## 第一步
-  把module下类WXPayConstants的APP_ID修改为项目在微信开放平台申请的appId
+  把module下类WXPayConstants的APP_ID修改为项目在微信开放平台申请的appId;若商户ID由前端写死，也要配置WXPayConstants的PARTNER_ID
 
 - ## 第二步
   在主包名目录下新建wxapi文件夹，将module下的WXPayEntryActivity复制到wxapi文件夹中。（若主包名目录下已有wxapi文件夹和WXPayEntryActivity文件，就不要重复添加了。）
+  AndroidManifest.xml加入以下代码
+ ```
+  <activity
+               android:name=".wxapi.WXPayEntryActivity"
+               android:configChanges="keyboardHidden|orientation|screenSize"
+               android:exported="true"
+               android:launchMode="singleTop"
+               android:screenOrientation="portrait"
+               android:theme="@android:style/Theme.Light.NoTitleBar" />
+  ```
 
 - ## 第三步（注册广播）
   在要进行支付的界面注册广播来接收支付结果的返回，界面同时要实现接口WXPayResultCallback。如代码所示，但调起微信支付后，支付成功、支付取消和支付失败会分别进入三个回调方法，可在里面编写对应逻辑。（++建议：如果项目有多个地方用到微信支付，可以编写一个基类BaseWXPayActivity，让其他支付界面继承++）
