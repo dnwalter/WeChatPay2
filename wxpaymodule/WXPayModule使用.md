@@ -84,7 +84,7 @@ builder.setAppId(...)
        .setSign(...)
        .build().toWXPayNotSign(PayActivity.this);
 ```
-3.   注意上面的方法是后台帮我们处理了签名，返回sign字段所调用的方法。若后台没进行签名算法处理（微信开发平台建议这个签名算法最好是放在后台处理），我们前端要自己生成签名，调用toWXPayAndSign方法。这时还要去设置WXPayConstants.APP_SECRET，这个值可以在微信开发者平台，所申请的项目的AppID的下方找到。
+3.   注意上面的方法是后台帮我们处理了签名，返回sign字段所调用的方法。若后台没进行签名算法处理（微信开发平台建议这个签名算法最好是放在后台处理），我们前端要自己生成签名，调用toWXPayAndSign方法。这时还要去设置WXPayConstants.APP_SECRET（注意：这个为商户平台的key，不是开发者平台的key），这个值可以在微信开发者平台，所申请的项目的AppID的下方找到。
 ```
 WXPayUtil.WXPayBuilder builder = new WXPayUtil.WXPayBuilder();
 builder.setAppId(...)
@@ -93,7 +93,7 @@ builder.setAppId(...)
 ```
 
 ## 总结
-   以上为发起微信支付到收到支付结果回调的整个流程。要前端自己进行签名的方法，我还没尝试过，不知是否正确。若真的要前端进行签名算法，该module的签名算法又有问题，可以参考以下链接修改签名算法。
+   以上为发起微信支付到收到支付结果回调的整个流程。要前端自己进行签名的方法，可以结合下面文档。
    
    [微信支付开发文档安全规范](https://pay.weixin.qq.com/wiki/doc/api/app/app.php?chapter=4_3)
    
